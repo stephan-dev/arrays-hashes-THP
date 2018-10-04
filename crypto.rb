@@ -16,25 +16,42 @@ montantspurs = montants.map { |montant| montant.delete_prefix('$').to_f }
 
 #puts montantspurs[1]
 
-hash = Hash[devises.zip(montantspurs)]
+cryptos = Hash[devises.zip(montantspurs)]
 
-#puts hash
-puts " "
 
-puts "La crypto qui a la plus grosse valeur est #{hash.key(hash.values.max)}"
-puts " "
-puts "La crypto qui a la plus petite valeur est #{hash.key(hash.values.min)}"
+puts
 
-puts hash.count { |k, v| k =~ /[Cc][Oo][Ii][Nn]/ }
+# crypto qui a la plus grosse valeur
+puts "La crypto qui a la plus grosse valeur est #{cryptos.key(cryptos.values.max)}"
+
+puts
+
+# crypto qui a la plus petite valeur
+puts "La crypto qui a la plus petite valeur est #{cryptos.key(cryptos.values.min)}"
+
+puts
+
+# Nombre de devises qui contiennent le mot "coin"
+puts "#{cryptos.count { |k, v| k =~ /[Cc][Oo][Ii][Nn]/ } } devises contiennent le mot coin "
+
+puts
+
+# Arrêt défilement
+puts "appuie sur entrée"
+gets 
+
 
 # Sors moi toutes les devises, dont le cours est inférieur à 6000
+cryptos6000 = cryptos.select { |k, v| v <= 6000 }
+puts "Voici toutes les devises dont le cours est inférieur à 6000 :"
+cryptos6000.each_key { |key| print "#{key}, " }
+puts "fin"
 
-puts hash.select { |k, v| v <= 6000 }
-puts " "
+puts
+puts
+puts
 
-# Quel est le cours le plus haut parmi celle-la ?
+# Quel est le cours le plus haut parmi celles-là ?
+puts "Parmi ces devises, celle dont le cours est le plus haut est #{cryptos6000.key(cryptos6000.values.max)}"
 
-hash2 = hash.select { |k, v| v <= 6000 }
-#puts hash2
-puts hash2.key(hash2.values.max)
-
+puts
