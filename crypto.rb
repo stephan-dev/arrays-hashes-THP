@@ -11,13 +11,11 @@ montants = ["$6558.07", "$468.95", "$0.487526", "$762.84", "$8.86", "$85.26", "$
   end
 =end
 
-
+# Dans le tableau "montants", on supprime tous les "$" et on change le type de string en float
 montantspurs = montants.map { |montant| montant.delete_prefix('$').to_f }
 
-#puts montantspurs[1]
-
+# Avec les deux tableaux, on fait un hash
 cryptos = Hash[devises.zip(montantspurs)]
-
 
 puts
 
